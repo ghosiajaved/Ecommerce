@@ -7,10 +7,6 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
-    /* <div className="App">
-      <br/>
-       <Form />
-    </div> */
 
     <Router>
       <Routes>
