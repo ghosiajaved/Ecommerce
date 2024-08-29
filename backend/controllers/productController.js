@@ -1,7 +1,28 @@
 // controllers/productController.js
-const client = require('../db/db');
+const client = require('../db/db'); // Ensure this is the correct file for database connection
 
-exports.getAllProducts = async (req, res) => {
+exports.createProduct = async (req, res) => {
+    console.log('Request to create product:', req.body);
+
+    const { name, description, price, quantity, category } = req.body;
+    
+    try {
+      const result = await client.query(
+        `INSERT INTO products (name, description, price, quantity, cat_id) 
+         VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        [name, description, price, quantity, category]
+      );
+  
+      res.status(201).json(result.rows[0]);
+    } catch (error) {
+      console.error('Error creating product:', error.stack || error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+
+/* exports.getAllProducts = async (req, res) => {
     try {
         const result = await client.query('SELECT * FROM products');
         res.status(200).json(result.rows);
@@ -36,16 +57,6 @@ exports.createProduct = async (req, res) => {
     }
 };
 
-// checking if validation error handler works fine or not
-/* exports.createProduct = (req, res, next) => {
-    const { name, price } = req.body;
-    if (!name || !price) {
-        const err = new Error('Validation Error: Name and price are required');
-        err.name = 'ValidationError'; // This triggers the validation error handler
-        return next(err);
-    }
-       
-}; */
 
 exports.updateProduct = async (req, res) => {
     try {
@@ -76,3 +87,15 @@ exports.deleteProduct = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+ */
+
+// checking if validation error handler works fine or not
+/* exports.createProduct = (req, res, next) => {
+    const { name, price } = req.body;
+    if (!name || !price) {
+        const err = new Error('Validation Error: Name and price are required');
+        err.name = 'ValidationError'; // This triggers the validation error handler
+        return next(err);
+    }
+       
+}; */

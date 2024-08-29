@@ -1,7 +1,19 @@
 // controllers/categoryController.js
 const client = require('../db/db');
 
-exports.getAllCategories = async (req, res) => {
+const getCategories = async (req, res) => {
+    try {
+      const categories = await pool.query('SELECT * FROM categories');
+      res.json(categories.rows);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ error: 'Server error' });
+    }
+  };
+
+  module.exports = { getCategories };
+
+/* exports.getAllCategories = async (req, res) => {
     try {
         const result = await client.query('SELECT * FROM categories');
         res.status(200).json(result.rows);
@@ -64,4 +76,4 @@ exports.deleteCategory = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-};
+}; */
