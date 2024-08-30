@@ -1,4 +1,55 @@
-// src/components/ProductList.js
+/* import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // Fetch products from backend
+    axios.get('http://localhost:3000/api/products/') 
+      .then(response => {
+        setProducts(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching products!', error);
+      });
+  }, []); // Empty dependency array means this runs once when the component mounts
+
+  return (
+    <div style={styles.productList}>
+      {products.length > 0 ? (
+        products.map((product) => (
+          <div key={product.id} style={styles.productCard}>
+            <h3>{product.name}</h3>
+            <p>Description: {product.description}</p>
+            <p>Price: Rs. {product.price}</p>
+            <p>Quantity: {product.quantity}</p>
+            <p>Category: {product.category}</p>
+          </div>
+        ))
+      ) : (
+        <p>No products available.</p>
+      )}
+    </div>
+  );
+};
+
+export default ProductList;
+
+const styles = {
+  productList: {
+    marginTop: '40px',
+  },
+  productCard: {
+    border: '1px solid #ccc',
+    padding: '15px',
+    marginBottom: '10px',
+    borderRadius: '5px',
+    backgroundColor: 'black',
+    color:'white',
+  }
+};
+ */
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -7,31 +58,82 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/products')
+    // Fetch products from backend
+    axios.get('http://localhost:3000/api/products/') 
       .then(response => {
         setProducts(response.data);
       })
       .catch(error => {
-        console.error('There was an error fetching the products!', error);
+        console.error('There was an error fetching products!', error);
       });
-  }, []);
+  }, []); // Empty dependency array means this runs once when the component mounts
 
   return (
-    <div>
-      <h2>Product List</h2>
-      <ul>
-        {products.map(product => (
-          <li key={product.id}>
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <p>Price: {product.price}</p>
-            <p>Quantity: {product.quantity}</p>
-            <p>Category: {product.categoryName}</p>
-          </li>
-        ))}
-      </ul>
+    <div style={styles.productList}>
+      {products.length > 0 ? (
+        products.map((product) => (
+          <div key={product.id} style={styles.productCard}>
+            <h3 style={styles.productName}>{product.name}</h3>
+            <p style={styles.productDescription}>{product.description}</p>
+            <p style={styles.productPrice}>Price: Rs. {product.price}</p>
+            <p style={styles.productQuantity}>Quantity: {product.quantity}</p>
+            <p style={styles.productCategory}>Category: {product.category}</p>
+          </div>
+        ))
+      ) : (
+        <p style={styles.noProducts}>No products available.</p>
+      )}
     </div>
   );
 };
 
 export default ProductList;
+
+const styles = {
+  productList: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: '40px',
+    backgroundColor:'#9EC8B9',
+  },
+  productCard: {
+    width: '300px',
+    border: '1px solid #ccc',
+    padding: '20px',
+    margin: '10px',
+    borderRadius: '10px',
+    backgroundColor: '#333',
+    color: '#fff',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+  },
+  productCardHover: {
+    transform: 'scale(1.05)',
+    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)',
+  },
+  productName: {
+    fontSize: '1.5rem',
+    marginBottom: '10px',
+  },
+  productDescription: {
+    fontSize: '1rem',
+    marginBottom: '10px',
+  },
+  productPrice: {
+    fontSize: '1.2rem',
+    marginBottom: '10px',
+  },
+  productQuantity: {
+    fontSize: '1rem',
+    marginBottom: '10px',
+  },
+  productCategory: {
+    fontSize: '1rem',
+    marginBottom: '10px',
+  },
+  noProducts: {
+    fontSize: '1.2rem',
+    color: '#777',
+  },
+};
