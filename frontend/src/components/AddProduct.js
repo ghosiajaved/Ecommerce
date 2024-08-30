@@ -128,7 +128,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    backgroundColor: '#9EC8B9',
+    backgroundColor: 'white',
   },
   form: {
     backgroundColor: '#fff',
