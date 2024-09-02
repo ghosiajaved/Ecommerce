@@ -1,19 +1,6 @@
-// controllers/categoryController.js
 const client = require('../db/db');
 
-const getCategories = async (req, res) => {
-    try {
-      const categories = await pool.query('SELECT * FROM categories');
-      res.json(categories.rows);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).json({ error: 'Server error' });
-    }
-  };
-
-  module.exports = { getCategories };
-
-/* exports.getAllCategories = async (req, res) => {
+exports.getAllCategories = async (req, res) => {
     try {
         const result = await client.query('SELECT * FROM categories');
         res.status(200).json(result.rows);
@@ -25,7 +12,7 @@ const getCategories = async (req, res) => {
 exports.getCategoryById = async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await client.query('SELECT * FROM categories WHERE category_id = $1', [id]);
+        const result = await client.query('SELECT * FROM categories WHERE id = $1', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({ message: 'Category not found' });
         }
@@ -53,7 +40,7 @@ exports.updateCategory = async (req, res) => {
         const { id } = req.params;
         const { name } = req.body;
         const result = await client.query(
-            'UPDATE categories SET name = $1 WHERE category_id = $2 RETURNING *',
+            'UPDATE categories SET name = $1 WHERE id = $2 RETURNING *',
             [name, id]
         );
         if (result.rows.length === 0) {
@@ -68,7 +55,7 @@ exports.updateCategory = async (req, res) => {
 exports.deleteCategory = async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await client.query('DELETE FROM categories WHERE category_id = $1 RETURNING *', [id]);
+        const result = await client.query('DELETE FROM categories WHERE id = $1 RETURNING *', [id]);
         if (result.rows.length === 0) {
             return res.status(404).json({ message: 'Category not found' });
         }
@@ -76,4 +63,4 @@ exports.deleteCategory = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-}; */
+};

@@ -5,6 +5,7 @@ import Form from './components/Form';
 import Home from './components/Home';
 import Products from './components/Products'; // Import the Products component
 import Orders from './components/Orders';
+import Categories from './components/Categories';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route path="/home" element={<PrivateRoute element={<Home />} />} />
       <Route path="/products" element={<PrivateRoute element={<Products />} />} />
       <Route path="/orders" element={<PrivateRoute element={<Orders />} />} />
+      <Route path="/categories" element={<PrivateRoute element={<Categories />} />} />
     </Routes>
   </Router>
   );
