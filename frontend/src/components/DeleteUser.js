@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const DeleteProduct = () => {
-    const [productName, setProductName] = useState('');
+const DeleteUser = () => {
+    const [userId, setUserId] = useState('');
     const [message, setMessage] = useState('');
 
     const handleDelete = async () => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/products/${productName}`);
-            setMessage(`Product deleted: ${response.data.message}`);
+            const response = await axios.delete(`http://localhost:3000/api/users/${userId}`);
+            setMessage(`User deleted: ${response.data.message}`);
             // Clear the message after 3 seconds
             setTimeout(() => {
                 setMessage('');
             }, 3000);
         } catch (error) {
-            setMessage(`Error deleting product: ${error.response ? error.response.data.error : error.message}`);
+            setMessage(`Error deleting user: ${error.response ? error.response.data.error : error.message}`);
             // Clear the message after 3 seconds
             setTimeout(() => {
                 setMessage('');
@@ -25,16 +25,16 @@ const DeleteProduct = () => {
     return (
         <div style={styles.container}>
             <form onSubmit={(e) => { e.preventDefault(); handleDelete(); }} style={styles.form}>
-                <h2 style={styles.heading}>Delete Product</h2>
+                <h2 style={styles.heading}>Delete User</h2>
                 <input
                     type="text"
-                    value={productName}
-                    onChange={(e) => setProductName(e.target.value)}
-                    placeholder="Enter product name"
+                    value={userId}
+                    onChange={(e) => setUserId(e.target.value)}
+                    placeholder="Enter user ID"
                     style={styles.input}
                     required
                 />
-                <button type="submit" style={styles.button}>Delete Product</button>
+                <button type="submit" style={styles.button}>Delete User</button>
                 {message && <p style={message.includes('Error') ? styles.errorText : styles.successText}>{message}</p>}
             </form>
         </div>
@@ -91,4 +91,4 @@ const styles = {
     },
 };
 
-export default DeleteProduct;
+export default DeleteUser;

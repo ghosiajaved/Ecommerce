@@ -2,7 +2,8 @@ import React from 'react';
 import AddOrder from './AddOrder';
 import OrderList from './OrderList';
 import UpdateOrder from './UpdateOrder';
-import DeleteOrder from './DeleteOrder'; // Import DeleteOrder component
+import DeleteOrder from './DeleteOrder'; 
+import Navbar from './Navbar';
 
 const Orders = () => {
     const [showAddOrder, setShowAddOrder] = React.useState(false);
@@ -16,7 +17,10 @@ const Orders = () => {
 
     return (
         <div style={styles.container}>
+            <Navbar/>
+            <br/>
             <h3>Orders Management</h3>
+            <br/>
             <button
                 onClick={() => {
                     setShowAddOrder(!showAddOrder);
@@ -77,6 +81,6 @@ export default Orders;
 
 const styles = {
     container: {
-        padding: '20px',
+        
     },
 };

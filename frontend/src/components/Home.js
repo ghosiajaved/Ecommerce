@@ -24,6 +24,12 @@ const Home = () => {
       <Link to="/categories" className="btn btn-dark" style={styles.categoriesLink}>
         Go to Category Page
       </Link>
+
+      <br /><br/>
+      <h3>Users</h3><br />
+      <Link to="/users" className="btn btn-dark" style={styles.usersLink}>
+        Go to Users Page
+      </Link>
     </div>
   );
 };

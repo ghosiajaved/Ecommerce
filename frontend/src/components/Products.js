@@ -2,7 +2,8 @@ import React from 'react';
 import AddProduct from './AddProduct';
 import ProductList from './ProductList';
 import UpdateProduct from './UpdateProduct';
-import DeleteProduct from './DeleteProduct'; // Import DeleteProduct component
+import DeleteProduct from './DeleteProduct'; 
+import Navbar from './Navbar';
 
 const Products = () => {
   const [showAddProduct, setShowAddProduct] = React.useState(false);
@@ -16,7 +17,10 @@ const Products = () => {
 
   return (
     <div style={styles.container}>
+    <Navbar/>
+    <br/>
       <h3>Products Management</h3>
+      <br/>
       <button
         onClick={() => {
           setShowAddProduct(!showAddProduct);
@@ -77,6 +81,6 @@ export default Products;
 
 const styles = {
   container: {
-    padding: '20px',
+    
   },
 };

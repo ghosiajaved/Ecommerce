@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Products from './components/Products'; // Import the Products component
 import Orders from './components/Orders';
 import Categories from './components/Categories';
+import Users from './components/Users';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Routes>
       {/* Redirect to login if no route is matched or if user is not authenticated */}
       <Route path="/" element={<Navigate to="/login" />} />
+
       
       {/* Login and Signup routes */}
       <Route path="/signup" element={<Form isSignup />} />
@@ -24,6 +26,8 @@ function App() {
       <Route path="/products" element={<PrivateRoute element={<Products />} />} />
       <Route path="/orders" element={<PrivateRoute element={<Orders />} />} />
       <Route path="/categories" element={<PrivateRoute element={<Categories />} />} />
+      <Route path="/users" element={<PrivateRoute element={<Users />} />} />
+
     </Routes>
   </Router>
   );
