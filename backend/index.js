@@ -28,9 +28,6 @@ const orderRoutes = require('./routes/orderRoute');
 const categoryRoutes = require('./routes/categoryRoute');
 //const authRoutes = require('./routes/authRoute');
 
-app.post('/api/users/login', (req, res) => {
-    res.json({ message: 'Login route working' });
-});
 
 // Apply Routes
 app.use('/api/products', productRoutes);

@@ -3,24 +3,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Form from './components/Form';
 import Home from './components/Home';
+import Products from './components/Products'; // Import the Products component
+import Orders from './components/Orders';
 import PrivateRoute from './components/PrivateRoute';
 
-
 function App() {
-
   return (
-
     <Router>
-      <Routes>
-
+    <Routes>
+      {/* Redirect to login if no route is matched or if user is not authenticated */}
       <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/signup" element={<Form isSignup />} />
-        <Route path="/login" element={<Form />} />
-        <Route path="/home" element={<PrivateRoute component={Home} />} />
+      
+      {/* Login and Signup routes */}
+      <Route path="/signup" element={<Form isSignup />} />
+      <Route path="/login" element={<Form />} />
 
-      </Routes>
-    </Router>
-
+      {/* Protected routes */}
+      <Route path="/home" element={<PrivateRoute element={<Home />} />} />
+      <Route path="/products" element={<PrivateRoute element={<Products />} />} />
+      <Route path="/orders" element={<PrivateRoute element={<Orders />} />} />
+    </Routes>
+  </Router>
   );
 }
 

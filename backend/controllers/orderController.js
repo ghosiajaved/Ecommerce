@@ -1,4 +1,3 @@
-// controllers/orderController.js
 const client = require('../db/db');
 
 exports.getAllOrders = async (req, res) => {
@@ -10,57 +9,54 @@ exports.getAllOrders = async (req, res) => {
     }
 };
 
-exports.getOrderById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const result = await client.query('SELECT * FROM orders WHERE order_id = $1', [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'Order not found' });
-        }
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-};
-
 exports.createOrder = async (req, res) => {
+    const { user_id, product, quantity } = req.body;
     try {
-        const { status, u_id } = req.body;
         const result = await client.query(
-            'INSERT INTO orders (status, u_id) VALUES ($1, $2) RETURNING *',
-            [status, u_id]
+            `INSERT INTO orders (user_id, product, quantity) VALUES ($1, $2, $3) RETURNING *`,
+            [user_id, product, quantity]
         );
         res.status(201).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 
-exports.updateOrder = async (req, res) => {
+exports.getOrderById = async (req, res) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params;
-        const { status, u_id } = req.body;
+        const result = await client.query('SELECT * FROM orders WHERE id = $1', [id]);
+        if (result.rows.length === 0) return res.status(404).json({ message: 'Order not found' });
+        res.json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+exports.updateOrderById = async (req, res) => {
+    const { id } = req.params;
+    const { user_id, product, quantity } = req.body;
+    try {
         const result = await client.query(
-            'UPDATE orders SET status = $1, u_id = $2 WHERE order_id = $3 RETURNING *',
-            [status, u_id, id]
+            `UPDATE orders SET user_id = $1, product = $2, quantity = $3 WHERE id = $4 RETURNING *`,
+            [user_id, product, quantity, id]
         );
-        if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'Order not found' });
-        }
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+        if (result.rows.length === 0) return res.status(404).json({ message: 'Order not found' });
+        res.json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
     }
 };
 
-exports.deleteOrder = async (req, res) => {
+exports.deleteOrderById = async (req, res) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params;
-        const result = await client.query('DELETE FROM orders WHERE order_id = $1 RETURNING *', [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'Order not found' });
-        }
-        res.status(200).json({ message: 'Order deleted' });
+        const result = await client.query(
+            'DELETE FROM orders WHERE id = $1 RETURNING *',
+            [id]
+        );
+        if (result.rows.length === 0) return res.status(404).json({ message: 'Order not found' });
+        res.status(200).json({ message: 'Order deleted successfully' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
