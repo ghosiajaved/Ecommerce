@@ -44,7 +44,7 @@ const UpdateProduct = () => {
             setTimeout(() => {
                 setFormVisible(false);
                 setSuccessMessage('');
-            }, 5000);
+            }, 2000);
 
         } catch (error) {
             console.error('There was an error updating the product!', error);

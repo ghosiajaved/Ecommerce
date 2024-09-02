@@ -6,7 +6,7 @@ const secret = process.env.SECRET_KEY;
 // Signup Controller
 exports.signup = async (req, res) => {
     console.log('Signup request received');
-    const { email, name, address, phone, password } = req.body;
+    const { username, email, password } = req.body;
 
     try {
         // Check if the email already exists
@@ -20,15 +20,15 @@ exports.signup = async (req, res) => {
 
         // Insert the new user into the database
         const result = await client.query(
-            'INSERT INTO users (email, name, address, phone, password) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [email, name, address, phone, hashedPassword]
+            'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+            [username, email, hashedPassword]
         );
 
         // Generate a JWT token
         const token = jwt.sign({ id: result.rows[0].user_id }, secret, { expiresIn: '1h' });
 
         // Respond with the token and user info (excluding the password)
-        res.status(201).json({ token, user: { email, name, address, phone } });
+        res.status(201).json({ token, user: { username, email } });
     } catch (error) {
         res.status(500).json({ message: 'Error during signup', error: error.message });
     }
@@ -36,6 +36,7 @@ exports.signup = async (req, res) => {
 
 // Login Controller
 exports.login = async (req, res) => {
+    console.log(req.body);
     const { email, password } = req.body;
     try {
         const result = await client.query('SELECT * FROM users WHERE email = $1', [email]);

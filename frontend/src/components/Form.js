@@ -5,9 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Form = ({ isSignup }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
+    const [username, setUsername] = useState('');
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
@@ -15,7 +13,7 @@ const Form = ({ isSignup }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const endpoint = isSignup ? '/api/users/signup' : '/api/users/login';
-        const data = isSignup ? { name, email, password, address, phone } : { email, password };
+        const data = isSignup ? { username, email, password } : { email,password };
 
         try {
             const response = await axios.post(`http://localhost:3000${endpoint}`, data);
@@ -34,22 +32,8 @@ const Form = ({ isSignup }) => {
                         <input
                             type="text"
                             placeholder="Name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            style={inputStyle}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Address"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                            style={inputStyle}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Phone"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             style={inputStyle}
                         />
                     </>
@@ -67,6 +51,7 @@ const Form = ({ isSignup }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     style={inputStyle}
+                    autoComplete="current-password"
                 />
                 <button type="submit" style={buttonStyle}>
                     {isSignup ? 'Sign Up' : 'Login'}
