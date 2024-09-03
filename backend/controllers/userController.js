@@ -37,7 +37,7 @@ exports.signup = async (req, res) => {
 
 // Login Controller
 exports.login = async (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     const { email, password } = req.body;
     try {
         const result = await client.query('SELECT * FROM users WHERE email = $1', [email]);

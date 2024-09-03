@@ -10,11 +10,14 @@ import Users from './components/Users';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
+
+  const isAuthenticated = !!localStorage.getItem('token');
+
   return (
     <Router>
     <Routes>
-      {/* Redirect to login if no route is matched or if user is not authenticated */}
-      <Route path="/" element={<Navigate to="/login" />} />
+     {/* Redirect to home if user is authenticated, otherwise to login */}
+     <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/login" />} />
 
       
       {/* Login and Signup routes */}
