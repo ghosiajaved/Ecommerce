@@ -30,6 +30,12 @@ const Home = () => {
       <Link to="/users" className="btn btn-dark" style={styles.usersLink}>
         Go to Users Page
       </Link>
+
+      <br /><br/>
+      <h3>Order-Products</h3><br />
+      <Link to="/order-products" className="btn btn-dark" style={styles.orderproductsLink}>
+        Go to Order-Products Page
+      </Link>
     </div>
   );
 };

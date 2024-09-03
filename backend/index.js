@@ -26,6 +26,7 @@ const productRoutes = require('./routes/productRoute');    // Checked all of the
 const userRoutes = require('./routes/userRoute');
 const orderRoutes = require('./routes/orderRoute');
 const categoryRoutes = require('./routes/categoryRoute');
+const orderProductsRoutes= require('./routes/orderProductsRoute')
 //const authRoutes = require('./routes/authRoute');
 
 
@@ -34,6 +35,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/order-products', orderProductsRoutes);
 //app.use('/api/auth', authRoutes);
 
 

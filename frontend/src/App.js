@@ -8,6 +8,7 @@ import Orders from './components/Orders';
 import Categories from './components/Categories';
 import Users from './components/Users';
 import PrivateRoute from './components/PrivateRoute';
+import OrderProducts from './components/OrderProducts';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
       <Route path="/orders" element={<PrivateRoute element={<Orders />} />} />
       <Route path="/categories" element={<PrivateRoute element={<Categories />} />} />
       <Route path="/users" element={<PrivateRoute element={<Users />} />} />
+      <Route path="/order-products" element={<PrivateRoute element={<OrderProducts />} />} />
 
     </Routes>
   </Router>
