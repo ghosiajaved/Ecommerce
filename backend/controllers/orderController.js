@@ -9,6 +9,7 @@ exports.getAllOrders = async (req, res) => {
     }
 };
 
+
 exports.createOrder = async (req, res) => {
     const { user_id, product, quantity } = req.body;
     try {
@@ -20,7 +21,8 @@ exports.createOrder = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
-};
+}; 
+
 
 exports.getOrderById = async (req, res) => {
     const { id } = req.params;
