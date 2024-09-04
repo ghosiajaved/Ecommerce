@@ -100,11 +100,6 @@ const Orders = () => {
     }
   };
 
-  /* const getProductById = (id) => {
-    const product = products.find(p => p.id === id);
-    return product ? product.id : 'Unknown'; // Display product ID instead of name
-  }; */
-
   const getUserById = (id) => {
     const user = users.find(u => u.id === id);
     return user ? user.username : 'Unknown';
@@ -249,3 +244,5 @@ const styles = {
 };
 
 export default Orders;
+
+ 

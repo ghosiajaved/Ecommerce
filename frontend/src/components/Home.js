@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -24,27 +25,24 @@ const Home = () => {
   return (
     <div style={styles.container}>
       <Navbar />
-      <br />
+      <br /><br/>
 
-      <h3>Products</h3><br />
-      <Link to="/products" className="btn btn-dark" style={styles.link}>Go to Products Page</Link>
-      <br /><br />
-
-      <h3>Orders</h3><br />
-      <Link to="/orders" className="btn btn-dark" style={styles.link}>Go to Orders Page</Link>
-      <br /><br />
-
-      <h3>Categories</h3><br />
-      <Link to="/categories" className="btn btn-dark" style={styles.link}>Go to Category Page</Link>
-      <br /><br />
-
-      <h3>Users</h3><br />
-      <Link to="/users" className="btn btn-dark" style={styles.link}>Go to Users Page</Link>
-      <br /><br />
-
-      <h3>Order-Products</h3><br />
-      <Link to="/order-products" className="btn btn-dark" style={styles.link}>Go to Order-Products Page</Link>
-      <br /><br />
+      {/* Cards for each section */}
+      <div style={styles.cardContainer}>
+        {sections.map((section) => (
+          <Card key={section.title} style={styles.card}>
+            <Card.Img variant="top" src={section.image} />
+            <Card.Body>
+              <Card.Title>
+                <Link to={section.link} style={styles.cardLink}>
+                  {section.title}
+                </Link>
+              </Card.Title>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
+      <br/>
 
       {/* Logout Button */}
       <Button variant="danger" onClick={handleLogout} style={styles.logoutButton}>Logout</Button>
@@ -66,6 +64,14 @@ const Home = () => {
 
 export default Home;
 
+const sections = [
+  { title: 'Products', link: '/products', image: 'products.jfif' },
+  { title: 'Orders', link: '/orders', image: 'orders.jfif' },
+  { title: 'Categories', link: '/categories', image: 'categories.jfif' },
+  { title: 'Users', link: '/users', image: 'users.jfif' },
+  { title: 'Order-Products', link: '/order-products', image: 'orderProducts.jfif' },
+];
+
 const styles = {
   container: {
     justifyContent: 'center',
@@ -73,8 +79,18 @@ const styles = {
     height: '100vh',
     backgroundColor: 'white',
   },
-  link: {
-    marginTop: '10px',
+  cardContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '20px',
+    justifyContent: 'center'
+  },
+  card: {
+    width: '25rem',
+  },
+  cardLink: {
+    textDecoration: 'none',
+    color: 'black'
   },
   logoutButton: {
     marginTop: '20px',

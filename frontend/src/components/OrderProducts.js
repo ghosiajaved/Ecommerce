@@ -71,6 +71,7 @@ const OrderProducts = () => {
         setIsUpdating(false);
         setCurrentOrderId(null);
         setCurrentProductId(null);
+        
         fetchOrderProducts();
     } catch (error) {
         console.error('Error submitting form', error);
